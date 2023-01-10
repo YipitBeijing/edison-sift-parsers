@@ -4,9 +4,9 @@ import AirportMapping from '../data/AirportMapping.json';
 import AirlineCheckinMapping from '../data/AirlineCheckinMapping.json';
 
 const EdisonEnvironmentUrls = {
-  development: 'https://mail-engineering.easilydo.com',
-  staging: 'https://mail-staging.easilydo.com',
-  production: 'https://mail.easilydo.com',
+  development: 'https://mail-api.engineering.edison.tech',
+  staging: 'https://mail-api.staging.edison.tech',
+  production: 'https://mail-api.edison.tech',
 };
 
 export const getSiftVendors = async (sifts, config) => {
