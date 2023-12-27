@@ -23,13 +23,13 @@ export const billParser = (sift) => {
   if (payload.totalPaymentDue) {
     if (payload.totalPaymentDue.price) {
       // Add $ symbol
-      if (payload.totalPaymentDue.price[0] !== '$') {
-        payload.totalPaymentDue.price = `$${payload.totalPaymentDue.price}`;
-        price = payload.totalPaymentDue.price;
-      } else {
-        price = payload.totalPaymentDue.price;
-      }
-
+      // if (payload.totalPaymentDue.price[0] !== '$') {
+      //   payload.totalPaymentDue.price = `$${payload.totalPaymentDue.price}`;
+      //   price = payload.totalPaymentDue.price;
+      // } else {
+      //   price = payload.totalPaymentDue.price;
+      // }
+      price = payload.totalPaymentDue.price;
       // removing zeroes
       if (
         payload.totalPaymentDue.price[0].slice(
