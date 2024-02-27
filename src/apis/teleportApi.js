@@ -1,5 +1,8 @@
 const apiUrl = 'https://api.teleport.org/api/cities/';
-
+/**
+ * This service has retired.
+ @deprecated
+ */
 export const getCityPhoto = async (city) => {
   if (!city) {
     console.error('error getting city photo, gotta provide a city...');

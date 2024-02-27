@@ -1,4 +1,3 @@
-import { getCityPhoto } from './teleportApi';
 import { getWikipediaImage } from './wikipediaImageApi';
 import AirportMapping from '../data/AirportMapping.json';
 import AirlineCheckinMapping from '../data/AirlineCheckinMapping.json';
@@ -98,7 +97,7 @@ export const getSiftVendor = (sift, config) => {
 const GetVendorInfo = async ({ id, user, token, env }) => {
   if (!user || !token) {
     console.error('Unable to find user or token in GetVendorInfo');
-    return;
+    return null;
   }
 
   const siftUrl = EdisonEnvironmentUrls[env];
@@ -134,26 +133,12 @@ const GetVendorInfo = async ({ id, user, token, env }) => {
 };
 
 export const getTravelImages = async (cities, api) => {
-  let cityImages;
-
+  let cityImages = [];
   if (!api) {
-    const teleportImages = await getImages(cities, getCityPhoto);
-    let remainingCities = cities.map((city, index) => (teleportImages[index] ? null : city));
-    let wikipediaImages = await getImages(remainingCities, getWikipediaImage);
+    const wikipediaImages = await getImages(cities, getWikipediaImage);
     cityImages = cities.map((city, index) => {
-      if (teleportImages[index]) {
-        return teleportImages[index];
-      } else if (wikipediaImages[index]) {
+      if (wikipediaImages[index]) {
         return wikipediaImages[index];
-      } else {
-        return null;
-      }
-    });
-  } else if (api === 'teleport') {
-    const teleportImages = await getImages(cities, getCityPhoto);
-    cityImages = cities.map((city, index) => {
-      if (teleportImages[index]) {
-        return teleportImages[index];
       } else {
         return null;
       }
@@ -176,21 +161,10 @@ export const getTravelImages = async (cities, api) => {
 
 export const getTravelImage = async (city, api) => {
   let image;
-
   if (!api) {
-    const teleportImage = await getCityPhoto(city);
-    if (!teleportImage) {
-      const wikiImage = await getWikipediaImage(city);
-      if (wikiImage) {
-        image = wikiImage;
-      }
-    } else {
-      image = teleportImage;
-    }
-  } else if (api === 'teleport') {
-    const teleportImage = await getCityPhoto(city);
-    if (teleportImage) {
-      image = teleportImage;
+    const wikiImage = await getWikipediaImage(city);
+    if (wikiImage) {
+      image = wikiImage;
     }
   } else if (api === 'wikipedia') {
     const wikiImage = await getWikipediaImage(city);

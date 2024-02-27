@@ -1,7 +1,7 @@
 {
   "name": "edison-sift-parsers",
   "version": "1.0.1",
-  "main": "parser.js",
+  "main": "src/main.js",
   "type": "module",
   "dependencies": {
     "moment": ">= 2",
